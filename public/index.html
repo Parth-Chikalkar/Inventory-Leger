@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory Ledger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-mark">▣</span>
+        <span class="logo-text">Inventory<strong>Ledger</strong></span>
+      </div>
+      <div class="header-meta" id="entry-count-badge">0 entries</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="panel panel--form">
+      <div class="panel-head">
+        <h2 class="panel-title">New Entry</h2>
+      </div>
+      <form id="entry-form" class="form" novalidate>
+        <div class="form-row">
+          <label class="form-label">Warehouse ID</label>
+          <input class="form-input" type="text" name="warehouse_id" placeholder="WH-01" />
+        </div>
+        <div class="form-row">
+          <label class="form-label">Category</label>
+          <select class="form-input" name="category">
+            <option value="">Select category</option>
+            <option>Electronics</option>
+            <option>Textiles</option>
+            <option>Chemicals</option>
+            <option>Furniture</option>
+            <option>Pharma</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Item Name</label>
+          <input class="form-input" type="text" name="item_name" placeholder="USB Hub" />
+        </div>
+        <div class="form-row form-row--half">
+          <div>
+            <label class="form-label">Week Number</label>
+            <input class="form-input" type="number" name="week_number" placeholder="1–52" min="1" max="52" />
+          </div>
+          <div>
+            <label class="form-label">Quantity</label>
+            <input class="form-input" type="number" name="quantity" placeholder="≥ 0" min="0" />
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Unit</label>
+          <select class="form-input" name="unit">
+            <option value="">Select unit</option>
+            <option>units</option>
+            <option>kg</option>
+            <option>litres</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label">Recorded By</label>
+          <input class="form-input" type="text" name="recorded_by" placeholder="Your name" />
+        </div>
+        <div id="form-error" class="form-error" hidden></div>
+        <button class="btn btn--primary" type="submit">Add Entry</button>
+      </form>
+    </section>
+
+    <section class="panel panel--entries">
+      <div class="panel-head">
+        <h2 class="panel-title">Entries</h2>
+        <div class="filters">
+          <input class="filter-input" type="text" id="filter-category" placeholder="Filter category…" />
+          <input class="filter-input" type="number" id="filter-min-qty" placeholder="Min qty…" min="0" />
+          <button class="btn btn--ghost" id="filter-btn">Apply</button>
+          <button class="btn btn--ghost" id="clear-btn">Clear</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="ledger-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Warehouse</th>
+              <th>Category</th>
+              <th>Item</th>
+              <th>Week</th>
+              <th>Qty</th>
+              <th>Unit</th>
+              <th>Recorded By</th>
+              <th>Created</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="entries-body">
+            <tr class="empty-row"><td colspan="10">No entries yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel panel--summary">
+      <div class="panel-head">
+        <h2 class="panel-title">Summary</h2>
+        <button class="btn btn--ghost" id="refresh-summary">Refresh</button>
+      </div>
+      <div class="table-wrap">
+        <table class="ledger-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Week</th>
+              <th>Total Qty</th>
+              <th>Entries</th>
+            </tr>
+          </thead>
+          <tbody id="summary-body">
+            <tr class="empty-row"><td colspan="4">No summary data.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
